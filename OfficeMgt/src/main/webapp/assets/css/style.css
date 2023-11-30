@@ -1258,3 +1258,8 @@ h6 {
   font-size: 13px;
   color: #012970;
 }
+
+.hr-head-ml
+{
+	margin-left: 15px;
+}

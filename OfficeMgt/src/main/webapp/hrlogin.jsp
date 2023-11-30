@@ -43,17 +43,17 @@
                                  <h5 class="card-title text-center pb-0 fs-4"></h5>
                                  <p class="text-center small">Enter your email & password to login</p>
                               </div>
-                              <form class="row g-3 needs-validation" novalidate>
+                              <form  method="post" action="./hrLogin">
                                  <div class="col-12">
                                     <label for="yourUsername" class="form-label">Username</label>
-                                    <input type="text" name="username" class="form-control" id="yourUsername" required>
+                                    <input type="text"  class="form-control" id="yourUsername" name="username" required>
                                  </div>
                                  <div class="col-12">
                                     <label for="yourPassword" class="form-label">Password</label>
-                                    <input type="password" name="password" class="form-control" id="yourPassword" required>
+                                    <input type="password"  class="form-control" id="yourPassword" name="pass" required>
                                  </div>
                                  <div class="col-12">
-                                    <a href="hr/hrdashboard.jsp" class="btn btn-primary w-100" type="submit">Login</a>
+                                    <button  class="btn btn-primary w-100 mt-3" type="submit">Login</button>
                                  </div>
                               </form>
                            </div>
