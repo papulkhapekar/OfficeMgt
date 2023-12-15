@@ -29,7 +29,9 @@
 
   <!-- Template Main CSS File -->
   <link href="../assets/css/style.css" rel="stylesheet">
-
+<%String in = (String)session.getAttribute("in"); %>
+<%request.setAttribute("in", in); %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 </head>
 
 <body>
@@ -49,7 +51,13 @@
    <!-- End Search Bar -->
 
     <nav class="header-nav ms-auto me-4">
-    
+    <c:if test="${empty in}">
+           <a href="../logattendance?id=2" class=" btn btn-primary">Login to Work</a>
+    </c:if>
+    <c:if test="${not empty in}">
+           <a href="../outattendance?id=2" class=" btn btn-danger">Logout to Work</a>
+    </c:if>
+    	
       <a href="#" class=" btn btn-primary">logout</a>
     </nav><!-- End Icons Navigation -->
 

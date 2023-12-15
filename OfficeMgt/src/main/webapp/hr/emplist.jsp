@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
+<head>
+	<%@page import="java.util.*" %>
+	<%@page import="bean.empbean" %>
+	<%@page import="dao.hrDao" %>
+</head>
    <body>
       <!-- ======= Header ======= -->
       <%@ include file="hrheader.jsp" %>  
@@ -8,6 +13,10 @@
       <!-- ======= Sidebar ======= -->
       <%@ include file="hrsidebar.jsp" %>  
       <!-- ======= Sidebar End======= -->
+    <%List <empbean>list = new ArrayList<empbean>();%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
+	<%list = hrDao.showAllEmp();%>
+	<%request.setAttribute("list", list);%>
       <main id="main" class="main">
          <div class="pagetitle">
             <h1>Employee List</h1>
@@ -25,25 +34,29 @@
                            <th scope="col">Hire Date</th>
                            <th scope="col">Contact</th>
                            <th scope="col">Email</th>
-                           <th scope="col">View</th>
+                           <th scope="col">Operations</th>
                         </tr>
                      </thead>
                      <tbody>
-                        <% int a = 50; 
-                           String firstname = "Heeramani";
-                           String lastname = "Mourya";
-                           for(int i = 1; i<=a; i++){%>
+                     	<%int i = 1;%>
+							<c:forEach items="${list}" var="u">
                         <tr>
-                           <th scope="row"><%out.print(i); %></th>
-                           <td><%out.print(firstname+" "+lastname); %></td>
-                           <td>Designer</td>
-                           <td>Male</td>
-                           <td>2016-05-25</td>
-                           <td>9999999999</td>
-                           <td>email@email.com</td>
-                           <td><button class="btn btn-warning btn-sm" style="font-size: small">View</button></td>
+                        	
+                           <th><%out.print(i++); %></th>
+                           <td>${u.getFname()} ${u.getLname()}</td>
+                           <td>${u.getDesignation()}</td>
+                           <td>${u.getGender()}</td>
+                           <td>${u.getDoj()}</td>
+                           <td>${u.getContact()}</td>
+                           <td>${u.getEmail()}</td>
+                           <td>
+                           	<a href="viewemp.jsp?id=${u.getEmpid()}" data-toggle="tooltip" title="View"><i class="bi bi-eye primary"></i></a> 
+                           	<a href="editEmp.jsp?id=${u.getEmpid()}" data-toggle="tooltip" title="Edit"><i class="bi bi-pencil primary"></i></a>
+                           	<a href="../deleteEmp?id=${u.getEmpid()}" data-toggle="tooltip" title="Delete"><i class="bi bi-file-earmark-x primary"></i></a>
+                           </td>
+                        	
                         </tr>
-                        <%} %>
+                 	</c:forEach>
                      </tbody>
                   </table>
                </div>

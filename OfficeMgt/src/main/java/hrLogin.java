@@ -37,15 +37,13 @@ public class hrLogin extends HttpServlet {
 		String username, password;
 		username = request.getParameter("username");
 		password = request.getParameter("pass");
-		
-		hrbean hb = new hrbean();
-		hb.setEmail(username);
-		hb.setPassword(password);
 		hrDao hd = new hrDao();
-		hb = hd.hrLogin(hb);
+		hrbean hb = new hrbean();
+		hb = hd.hrLogin(username, password);
+		HttpSession session=request.getSession();  
 		if(username.equals(hb.getEmail()) && password.equals(hb.getPassword()))
 		{
-			 HttpSession session=request.getSession();  
+			 
 			 session.setAttribute("id", hb.getId());
 			 session.setAttribute("name", hb.getName());
 			 session.setAttribute("designation", hb.getDesignation());
@@ -53,7 +51,8 @@ public class hrLogin extends HttpServlet {
 		}
 		else
 		{
-			pw.print("Invalid email or password");
+			session.setAttribute("errMsg", "Invalid Cradentials");
+			response.sendRedirect("hrlogin.jsp");
 		}
 	}
 

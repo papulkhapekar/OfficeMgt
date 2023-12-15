@@ -23,6 +23,15 @@
       <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
       <!-- Template Main CSS File -->
       <link href="assets/css/style.css" rel="stylesheet">
+      <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
+      <%String errMsg = (String)session.getAttribute("errMsg");%> 
+      <%request.setAttribute("errMsg", errMsg);%> 
+      <%
+      	if(session.getAttribute("id")!=null)
+      	{
+      		response.sendRedirect("hr/hrdashboard.jsp");
+      	}
+      %>
    </head>
    <body>
       <main>
@@ -41,6 +50,10 @@
                            <div class="card-body">
                               <div class="pt-4 pb-2">
                                  <h5 class="card-title text-center pb-0 fs-4"></h5>
+                                 <c:if test="${not empty errMsg}">
+                                 <p class="text-center"><span class="text-danger">${errMsg}</span></p>
+                                 <c:remove var="errMsg"/>
+                                 </c:if>
                                  <p class="text-center small">Enter your email & password to login</p>
                               </div>
                               <form  method="post" action="./hrLogin">

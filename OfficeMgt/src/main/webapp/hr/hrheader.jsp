@@ -26,10 +26,25 @@
   <link href="../assets/vendor/quill/quill.bubble.css" rel="stylesheet">
   <link href="../assets/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="../assets/vendor/simple-datatables/style.css" rel="stylesheet">
-
+	<style>
+		.fontdesign
+		{
+			color:black;
+			font-size:small;
+		}
+	</style>
   <!-- Template Main CSS File -->
   <link href="../assets/css/style.css" rel="stylesheet">
-	<%int id = (int)session.getAttribute("id");%>
+	<% int id = 0;
+      	if(session.getAttribute("id")!=null)
+      	{
+      		id = (int)session.getAttribute("id");
+      	}
+      	else
+      	{ response.sendRedirect("../hrlogin.jsp");
+      		 
+      	}
+      %>
 	<%String name = (String)session.getAttribute("name");%>
 	<%String designation = (String) session.getAttribute("designation");%>
 	<% request.setAttribute("id",id);%>
@@ -51,7 +66,7 @@
    <!-- End Search Bar -->
 	<h5  style="margin-left:20px; margin-bottom:20px;"><h5><b>Welcome, ${name} (${designation})</b></h5>
     <nav class="header-nav ms-auto me-4">
-      <a href="#" class=" btn btn-primary">logout</a>
+      <a href="../hrlogout" class=" btn btn-primary">logout</a>
     </nav><!-- End Icons Navigation -->
 
   </header><!-- End Header -->
