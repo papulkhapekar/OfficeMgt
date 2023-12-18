@@ -39,20 +39,29 @@ public class emplogin extends HttpServlet {
 		empbean eb = new empbean();
 		eb = ed.empllogin(email, password);
 		HttpSession session = request.getSession();
-		if(email.equals(eb.getEmail()) && password.equals(eb.getPassword()))
+		if(eb != null)
 		{
-			session.setAttribute("id", eb.getEmpid());
-			session.setAttribute("fname", eb.getFname());
-			session.setAttribute("lanme", eb.getLname());
-			session.setAttribute("email", eb.getEmail());
-			session.setAttribute("desi", eb.getDesignation());
-			response.sendRedirect("emp/empdashboard.jsp");
+			if(email.equals(eb.getEmail()) && password.equals(eb.getPassword()))
+			{
+				session.setAttribute("id", eb.getEmpid());
+				session.setAttribute("fname", eb.getFname());
+				session.setAttribute("lanme", eb.getLname());
+				session.setAttribute("email", eb.getEmail());
+				session.setAttribute("desi", eb.getDesignation());
+				response.sendRedirect("emp/empdashboard.jsp");
+			}
+			else
+			{
+				session.setAttribute("errMsg", "Invalid Cradentials");
+				response.sendRedirect("emplogin.jsp");
+			}
 		}
 		else
 		{
 			session.setAttribute("errMsg", "Invalid Cradentials");
 			response.sendRedirect("emplogin.jsp");
 		}
+		
 	}
 
 }

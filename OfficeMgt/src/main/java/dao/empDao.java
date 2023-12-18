@@ -43,7 +43,7 @@ static Connection con = null;
 					 ab.setEmail(rs.getString(4));
 					 ab.setPassword(rs.getString(5));
 					 ab.setDesignation(rs.getString(6));
-					 System.out.println(rs.getString(5));
+					 
 				 }
 			 
 			 
