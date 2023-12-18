@@ -70,10 +70,10 @@
 
     <nav class="header-nav ms-auto me-4">
     <c:if test="${empty in}">
-           <a href="../logattendance?id=2" class=" btn btn-primary">Login to Work</a>
+           <a href="../logattendance?id=${id}" class=" btn btn-primary">Login to Work</a>
     </c:if>
     <c:if test="${not empty in}">
-           <a href="../outattendance?id=2" class=" btn btn-danger">Logout to Work</a>
+           <a href="../outattendance?id=${id}" class=" btn btn-danger">Logout to Work</a>
     </c:if>
     	
       <a href="../emplogout" class=" btn btn-primary">logout</a>
