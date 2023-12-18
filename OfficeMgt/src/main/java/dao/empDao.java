@@ -3,6 +3,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import bean.attBean;
 import bean.empbean;
@@ -21,6 +22,36 @@ static Connection con = null;
 			e.printStackTrace();
 		}
 		return con;
+	}
+	
+	public static empbean empllogin(String email, String pass)
+	{
+		empbean ab = null;
+		try {
+			Connection con = Connect();
+			 PreparedStatement ps=con.prepareStatement("select empid,fname,lname,email,password,designation from employee where email=? and password=?");
+			 ps.setString(1, email);
+			 ps.setString(2, pass);
+			 ResultSet rs = ps.executeQuery();
+		
+				 while(rs.next())
+				 {
+					 ab = new empbean();
+					 ab.setEmpid(rs.getInt(1));
+					 ab.setFname(rs.getString(2));
+					 ab.setLname(rs.getString(3));
+					 ab.setEmail(rs.getString(4));
+					 ab.setPassword(rs.getString(5));
+					 ab.setDesignation(rs.getString(6));
+					 System.out.println(rs.getString(5));
+				 }
+			 
+			 
+		}catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		return ab;
 	}
 	
 	public static int LogAttendance(attBean ab)

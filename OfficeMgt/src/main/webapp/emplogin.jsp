@@ -23,6 +23,15 @@
       <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
       <!-- Template Main CSS File -->
       <link href="assets/css/style.css" rel="stylesheet">
+       <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
+      <%String errMsg = (String)session.getAttribute("errMsg");%> 
+      <%request.setAttribute("errMsg", errMsg);%> 
+      <%
+      	if(session.getAttribute("id")!=null)
+      	{
+      		response.sendRedirect("emp/empdashboard.jsp");
+      	}
+      %>
    </head>
    <body>
       <main>
@@ -41,19 +50,23 @@
                            <div class="card-body">
                               <div class="pt-4 pb-2">
                                  <h5 class="card-title text-center pb-0 fs-4"></h5>
+                                 <c:if test="${not empty errMsg}">
+                                 <p class="text-center"><span class="text-danger">${errMsg}</span></p>
+                                 <c:remove var="errMsg"/>
+                                 </c:if>
                                  <p class="text-center small">Enter your email & password to login</p>
                               </div>
-                              <form class="row g-3 needs-validation" novalidate>
+                              <form class="row g-3 needs-validation" method="post" action="emplogin">
                                  <div class="col-12">
                                     <label for="yourUsername" class="form-label">Username</label>
-                                    <input type="text" name="username" class="form-control" id="yourUsername" required>
+                                    <input type="email" name="username" class="form-control" name="username" required>
                                  </div>
                                  <div class="col-12">
                                     <label for="yourPassword" class="form-label">Password</label>
-                                    <input type="password" name="password" class="form-control" id="yourPassword" required>
+                                    <input type="password" name="password" class="form-control" name="password" required>
                                  </div>
                                  <div class="col-12">
-                                    <a href="emp/empdashboard.jsp" class="btn btn-primary w-100" type="submit">Login</a>
+                                    <button class="btn btn-primary w-100" type="submit">Login</button>
                                  </div>
                               </form>
                            </div>
